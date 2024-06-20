@@ -105,6 +105,12 @@ bool ThreadPool::stop(const bool force)
 		if (!force) {
 			waitForTasks();
 		}
+		else 
+		{
+			mutex_.lock();
+			task_queue_.clear();
+			mutex_.unlock();
+		}
 		
 		run_ = false;
 		for (size_t i = 0; i < threads_.size(); ++i) 
